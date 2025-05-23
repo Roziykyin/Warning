@@ -1,84 +1,36 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Custom Key Wallet Crypto</title>
+  <title>Custom Wallet Address Input</title>
   <style>
-    body {
-      font-family: sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background: #f5f5f5;
-    }
-    header {
-      background: #1e1e2f;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      background: white;
-      padding: 2rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h1, h2 {
-      color: #333;
-    }
-    code {
-      background: #eee;
-      padding: 0.2rem 0.4rem;
-      border-radius: 4px;
-    }
-    pre {
-      background: #eee;
-      padding: 1rem;
-      overflow-x: auto;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: #1e1e2f;
-      color: white;
-    }
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    label, input, button { display: block; margin-top: 10px; }
+    input { padding: 8px; width: 100%; max-width: 400px; }
+    button { padding: 10px 20px; margin-top: 15px; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Custom Key Wallet Crypto</h1>
-    <p>Cara membuat dompet crypto dengan kunci kustom</p>
-  </header>
-  <main>
-    <h2>Pengantar</h2>
-    <p>Dompet kripto memungkinkan Anda menyimpan dan mengelola aset digital. Di sini kita akan membuat dompet dengan keypair yang ditentukan sendiri (custom private key).</p>
+  <h2>Paste Your Ethereum Wallet Address</h2><label for="walletAddress">Wallet Address:</label> <input type="text" id="walletAddress" placeholder="Paste your Ethereum address here" />
 
-    <h2>Langkah-langkah</h2>
-    <ol>
-      <li>Generate <strong>private key</strong> secara manual</li>
-      <li>Dapatkan <strong>public key</strong> dan <strong>address</strong> dari private key</li>
-      <li>Import ke wallet</li>
-    </ol>
+<button id="useAddressButton">Use Address</button>
 
-    <h2>Contoh Kode</h2>
-    <p>Berikut contoh menggunakan JavaScript dan library <code>ethers.js</code>:</p>
-    <pre><code>// Import library
-const {{ Wallet }} = require("ethers");
+  <p id="result"></p>  <script>
+    function isValidEthereumAddress(address) {
+      return /^0x[a-fA-F0-9]{40}$/.test(address);
+    }
 
-// Gunakan private key buatan sendiri
-const privateKey = "0xYOUR_CUSTOM_PRIVATE_KEY";
-const wallet = new Wallet(privateKey);
+    document.getElementById('useAddressButton').addEventListener('click', function() {
+      const walletAddress = document.getElementById('walletAddress').value.trim();
+      const resultElement = document.getElementById('result');
 
-console.log("Address:", wallet.address);
-</code></pre>
-
-    <h2>Peringatan</h2>
-    <p><strong>Jangan pernah</strong> menggunakan private key yang tidak aman atau telah dipublikasikan. Simpan private key secara offline dan aman.</p>
-  </main>
-  <footer>
-    Dibuat dengan semangat oleh Anda | © 2025
-  </footer>
-</body>
+      if (isValidEthereumAddress(walletAddress)) {
+        resultElement.textContent = `Valid Ethereum address: ${walletAddress}`;
+        resultElement.style.color = 'green';
+      } else {
+        resultElement.textContent = 'Invalid Ethereum address. Please check again.';
+        resultElement.style.color = 'red';
+      }
+    });
+  </script></body>
 </html>
