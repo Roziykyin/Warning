@@ -34,3 +34,28 @@
     });
   </script></body>
 </html>
+
+<label for="walletAddress">Wallet Address:</label>
+<input type="text" id="walletAddress" placeholder="Paste your Ethereum address here">
+<button id="useAddressButton">Use Address</button>
+
+document.getElementById('useAddressButton').addEventListener('click', function() {
+  const walletAddress = document.getElementById('walletAddress').value.trim();
+  if (walletAddress) {
+    // Lakukan tindakan yang diperlukan dengan alamat wallet
+    console.log('Wallet Address:', walletAddress);
+    // Misalnya, Anda dapat menampilkan alamat di UI atau menggunakannya dalam proses lainnya
+  } else {
+    alert('Please enter a valid Ethereum address.');
+  }
+});
+function isValidEthereumAddress(address) {
+  return /^0x[a-fA-F0-9]{40}$/.test(address);
+}
+
+if (isValidEthereumAddress(walletAddress)) {
+  // Proses alamat
+} else {
+  alert('Invalid Ethereum address.');
+}
+
